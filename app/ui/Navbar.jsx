@@ -29,16 +29,16 @@ export function Navbar() {
         <Button
           variant="ghost"
           asChild
-          className={cn(pathname === "/" && "bg-muted")}
+          className={cn(pathname === "/dashboard" && "bg-muted")}
         >
           <Link href="/">Home</Link>
         </Button>
         <Button
           variant="ghost"
           asChild
-          className={cn(pathname === "/faculty" && "bg-muted")}
+          className={cn(pathname === "/dashboard/faculty" && "bg-muted")}
         >
-          <Link href="/faculty">Faculty</Link>
+          <Link href="/dashboard/faculty">Faculty</Link>
         </Button>
       </>
     ),
@@ -51,7 +51,7 @@ export function Navbar() {
     <nav className="border-b">
       <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
         <div className="flex items-center">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/dashboard" className="text-xl font-bold">
             RoomReady
           </Link>
         </div>
@@ -81,10 +81,12 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <Avatar>
-            <AvatarImage src="/placeholder-avatar.jpg" alt="@user" />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+          <Link href="/dashboard/profile">
+            <Avatar>
+              <AvatarImage src="/placeholder-avatar.jpg" alt="@user" />
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
+          </Link>
           <div className="pl-3">
             <form action={logout_user} className="">
               <Button>Log Out</Button>
@@ -105,9 +107,11 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   asChild
-                  className={cn(pathname === "/faculty" && "bg-muted")}
+                  className={cn(
+                    pathname === "/dashboard/profile" && "bg-muted"
+                  )}
                 >
-                  <Link href="/">Profile</Link>
+                  <Link href="/dashboard/profile">Profile</Link>
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
