@@ -1,9 +1,12 @@
-const Profile = () => {
+import ProfilePage from "../../ui/Profile";
+import { auth } from "@/app/auth";
+const page = async () => {
+  const { user } = await auth();
   return (
     <div className="p-5">
-      <h1>Profile</h1>
+      <ProfilePage userData={user} />
     </div>
   );
 };
 
-export default Profile;
+export default page;
