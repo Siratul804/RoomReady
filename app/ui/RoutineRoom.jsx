@@ -18,7 +18,7 @@ function RoutineRoom({ user }) {
     <div className="flex items-center justify-center min-h-screen ">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-lg font-bold text-center">
+          <CardTitle className="text-2xl font-bold text-center">
             Add New Entry
           </CardTitle>
         </CardHeader>

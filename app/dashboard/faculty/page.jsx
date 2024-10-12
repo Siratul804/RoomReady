@@ -1,8 +1,8 @@
-const Faculty = () => {
+import Faculty from "../../ui/Faculty";
+const page = () => {
   return (
     <div className="p-5">
-      {" "}
-      <h1>Faculty</h1>{" "}
+      <Faculty />
     </div>
   );
 };

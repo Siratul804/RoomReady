@@ -16,10 +16,10 @@ const LoginForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md py-5 ">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            RoomReady
+            Sign In With Room Ready
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -47,6 +47,9 @@ const LoginForm = () => {
             <Button className="w-full" type="submit">
               Sign in
             </Button>
+            <p className="text-center text-sm ">
+              Copyright © 2023 Room Ready. All rights reserved
+            </p>
             {state && (
               <div className="mt-4 text-center text-red-500">
                 {state.error && state.error.message}
