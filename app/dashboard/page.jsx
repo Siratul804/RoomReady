@@ -1,6 +1,7 @@
 import HomePage from "@/app/ui/Home";
+import { auth } from "@/app/auth";
 
-const Dashboard = () => {
+const Dashboard = async () => {
   return (
     <div className="p-5">
       <HomePage />

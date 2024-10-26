@@ -35,16 +35,20 @@ export const addUser = async (formData) => {
 };
 
 export const authenticate = async (prevState, formData) => {
-  const { email, password } = Object.fromEntries(formData);
-  console.log(email, password);
-
   try {
-    await signIn("credentials", { email, password });
-  } catch (err) {
-    if (err.message.includes("CredentialsSignin")) {
+    const { email, password } = Object.fromEntries(formData);
+
+    await signIn("credentials", {
+      email,
+      password,
+    });
+  } catch (error) {
+    if (error.type === "CredentialsSignin") {
+      console.log("Wrong Credentials");
       return "Wrong Credentials";
     }
-    throw err;
+    redirect("/dashboard");
+    throw error;
   }
 };
 

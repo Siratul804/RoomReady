@@ -12,30 +12,43 @@ import { Mail, Phone } from "lucide-react";
 const faculties = [
   {
     id: 1,
-    name: "Dr. Emily Johnson",
-    department: "Computer Science",
-    position: "Associate Professor",
+    name: "Dr. Engr. Shah Murtaza Rashid Al Masud",
+    department: "Computer Science and Engineering",
+    position: "Professor",
     email: "emily.johnson@university.edu",
     phone: "+1 (555) 123-4567",
-    imageUrl: "https://github.com/shadcn.png",
+    imageUrl:
+      "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=RfilYIgAAAAJ&citpid=1",
   },
   {
     id: 2,
-    name: "Prof. Michael Chen",
-    department: "Physics",
-    position: "Full Professor",
+    name: "Dr. Bilkis Jamal Ferdosi",
+    department: "Computer Science and Engineering",
+    position: "Professor",
     email: "michael.chen@university.edu",
     phone: "+1 (555) 987-6543",
-    imageUrl: "https://github.com/shadcn.png",
+    imageUrl:
+      "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=QaITgeIAAAAJ&citpid=2",
   },
   {
     id: 3,
-    name: "Dr. Sarah Patel",
-    department: "Biology",
-    position: "Assistant Professor",
+    name: "Prof. Dr. Aloke Kumar Saha",
+    department: "Computer Science and Engineering",
+    position: "Professor",
     email: "sarah.patel@university.edu",
     phone: "+1 (555) 246-8135",
-    imageUrl: "https://github.com/shadcn.png",
+    imageUrl:
+      "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=a9t8g-AAAAAJ&citpid=10",
+  },
+  {
+    id: 4,
+    name: "Dr. Nasima Begum",
+    department: "Computer Science and Engineering",
+    position: "Associate Professor",
+    email: "sarah.patel@university.edu",
+    phone: "+1 (555) 246-8135",
+    imageUrl:
+      "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=i1GeAwcAAAAJ&citpid=3",
   },
 ];
 

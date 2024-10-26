@@ -1,6 +1,11 @@
 import { Navbar } from "../ui/Navbar";
 
-const Layout = ({ children }) => {
+import { auth } from "@/app/auth";
+
+const Layout = async ({ children }) => {
+  const { user } = await auth();
+  console.log(user);
+
   return (
     <>
       <Navbar />
