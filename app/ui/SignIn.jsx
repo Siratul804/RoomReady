@@ -2,12 +2,13 @@
 
 import { authenticate } from "@/app/lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +22,24 @@ const LoginForm = () => {
 
     return (
       <Button className="w-full" type="submit">
-        {pending ? "Logining..." : "Sign in"}
+        {pending ? "Logining..." : "Sign In"}
       </Button>
     );
   }
 
   const [state, formAction] = useFormState(authenticate, undefined);
-  console.log(state);
+
+  useEffect(() => {
+    if (state === "Wrong Credentials") {
+      toast("Please Provide Valid Information", {
+        style: {
+          borderRadius: "10px",
+          background: "red",
+          color: "white",
+        },
+      });
+    }
+  }, [state]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -76,6 +88,15 @@ const LoginForm = () => {
               </div>
             </div>
             <Submit />
+            {state === "Wrong Credentials" ? (
+              <>
+                <p className="text-red-500 text-right text-sm">
+                  Wrong Credentials
+                </p>
+              </>
+            ) : (
+              <></>
+            )}
 
             <p className="text-center text-sm">
               Copyright © 2023 Room Ready. All rights reserved
