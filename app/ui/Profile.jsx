@@ -20,93 +20,15 @@ import {
 import { PlusCircle, Clock, Users, DoorOpen } from "lucide-react";
 import Link from "next/link";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Mail, User, Key, Shield } from "lucide-react";
 
-export default function ProfilePage({ userData }) {
-  const [routineData, setRoutineData] = useState([
-    {
-      id: 1,
-      batchNumber: "B001",
-      roomNumber: "R101",
-      section: "A",
-      startTime: "09:00 AM",
-      endTime: "10:30 AM",
-      status: "busy",
-    },
-    {
-      id: 2,
-      batchNumber: "B002",
-      roomNumber: "R102",
-      section: "B",
-      startTime: "10:45 AM",
-      endTime: "12:15 PM",
-      status: "available",
-    },
-    {
-      id: 3,
-      batchNumber: "B003",
-      roomNumber: "R103",
-      section: "C",
-      startTime: "01:00 PM",
-      endTime: "02:30 PM",
-      status: "busy",
-    },
-    {
-      id: 4,
-      batchNumber: "B004",
-      roomNumber: "R104",
-      section: "D",
-      startTime: "02:45 PM",
-      endTime: "04:15 PM",
-      status: "available",
-    },
-  ]);
-
-  const handleStatusChange = (id, newStatus) => {
-    setRoutineData(
-      routineData.map((entry) =>
-        entry.id === id ? { ...entry, status: newStatus } : entry
-      )
-    );
-  };
-
-  // Sample user data
-  // const user = {
-  //   name: "John Doe",
-  //   email: "john.doe@example.com",
-  //   username: "johndoe",
-  //   idNumber: "ID123456",
-  //   isAdmin: true,
-  //   avatarUrl: "https://github.com/shadcn.png", // Replace with actual avatar URL
-  // };
-
+export default function ProfilePage({ userData, routineData }) {
   return (
     <>
       <div className="container mx-auto py-10 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-            <CardHeader className="flex flex-col sm:flex-row items-center gap-4">
-              <Avatar className="w-24 h-24 border-4 border-white">
-                <AvatarImage src={user.avatarUrl} alt={user.name} />
-                <AvatarFallback>
-                  {user.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </AvatarFallback>
-              </Avatar>
-              <div className="text-center sm:text-left">
-                <CardTitle className="text-3xl font-bold">
-                  {user.name}
-                </CardTitle>
-                <p className="text-lg opacity-80">{user.username}</p>
-              </div>
-            </CardHeader>
-          </Card> */}
-
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
@@ -186,40 +108,40 @@ export default function ProfilePage({ userData }) {
                   {routineData.map((entry) => (
                     <TableRow key={entry.id}>
                       <TableCell className="font-medium">
-                        {entry.batchNumber}
+                        {entry.Batch}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center">
                           <DoorOpen className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.roomNumber}
+                          {entry.RoomNumber}
                         </div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center">
                           <Users className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.section}
+                          {entry.Section}
                         </div>
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end">
                           <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.startTime}
+                          {entry.StartedTime}
                         </div>
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end">
                           <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.endTime}
+                          {entry.EndTime}
                         </div>
                       </TableCell>
                       <TableCell className="text-center">
                         <Badge
                           variant={
-                            entry.status === "busy" ? "destructive" : "success"
+                            entry.Status === "Busy" ? "destructive" : "success"
                           }
                         >
-                          {entry.status.charAt(0).toUpperCase() +
-                            entry.status.slice(1)}
+                          {entry.Status.charAt(0).toUpperCase() +
+                            entry.Status.slice(1)}
                         </Badge>
                       </TableCell>
                       <TableCell>
@@ -227,7 +149,7 @@ export default function ProfilePage({ userData }) {
                           onValueChange={(value) =>
                             handleStatusChange(entry.id, value)
                           }
-                          defaultValue={entry.status}
+                          defaultValue={entry.Status}
                         >
                           <SelectTrigger className="w-[110px]">
                             <SelectValue placeholder="Change status" />
