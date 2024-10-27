@@ -1,7 +1,15 @@
-const Layout = ({ children }) => {
+import { auth } from "@/app/auth";
+const Layout = async ({ children }) => {
+  const { user } = await auth();
   return (
     <>
-      <div>{children}</div>
+      {user.isAdmin ? (
+        <div>{children}</div>
+      ) : (
+        <div className="text-center p-5 text-lg">
+          Sorry you are not allow in this page !
+        </div>
+      )}
     </>
   );
 };

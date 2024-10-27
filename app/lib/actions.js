@@ -8,9 +8,9 @@ import bcrypt from "bcrypt";
 import { User } from "../lib/models";
 import { signOut } from "@/app/auth";
 
-export const addUser = async (formData) => {
+export const addUser = async (prevState, formData) => {
   const { uap_id, email, password, isAdmin } = Object.fromEntries(formData);
-  // console.log(uap_id, email, password, isAdmin);
+  console.log(uap_id, email, password, isAdmin);
   try {
     connectToDB();
 
@@ -27,11 +27,16 @@ export const addUser = async (formData) => {
     await newUser.save();
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to create user!");
+
+    return {
+      message: "Already Exits",
+    };
   }
 
   revalidatePath("/");
-  redirect("/");
+  return {
+    message: "User Added",
+  };
 };
 
 export const authenticate = async (prevState, formData) => {

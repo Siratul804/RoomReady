@@ -74,20 +74,20 @@ export default function ProfilePage({ userData }) {
   };
 
   // Sample user data
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    username: "johndoe",
-    idNumber: "ID123456",
-    isAdmin: true,
-    avatarUrl: "https://github.com/shadcn.png", // Replace with actual avatar URL
-  };
+  // const user = {
+  //   name: "John Doe",
+  //   email: "john.doe@example.com",
+  //   username: "johndoe",
+  //   idNumber: "ID123456",
+  //   isAdmin: true,
+  //   avatarUrl: "https://github.com/shadcn.png", // Replace with actual avatar URL
+  // };
 
   return (
     <>
       <div className="container mx-auto py-10 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+          {/* <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
             <CardHeader className="flex flex-col sm:flex-row items-center gap-4">
               <Avatar className="w-24 h-24 border-4 border-white">
                 <AvatarImage src={user.avatarUrl} alt={user.name} />
@@ -105,7 +105,7 @@ export default function ProfilePage({ userData }) {
                 <p className="text-lg opacity-80">{user.username}</p>
               </div>
             </CardHeader>
-          </Card>
+          </Card> */}
 
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
@@ -138,15 +138,15 @@ export default function ProfilePage({ userData }) {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Admin Privileges</span>
                   <Badge
-                    variant={user.isAdmin ? "default" : "secondary"}
+                    variant={userData.isAdmin ? "default" : "secondary"}
                     className="text-xs"
                   >
-                    {user.isAdmin ? "Enabled" : "Disabled"}
+                    {userData.isAdmin ? "Enabled" : "Disabled"}
                   </Badge>
                 </div>
                 <Separator className="my-4" />
                 <p className="text-sm text-muted-foreground">
-                  {user.isAdmin
+                  {userData.isAdmin
                     ? "You have full administrative access to the system."
                     : "You have standard user access to the system."}
                 </p>
