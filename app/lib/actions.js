@@ -99,3 +99,16 @@ export const addRoutine = async (prevState, formData) => {
     message: "Routine Created",
   };
 };
+
+export const deleteRoutineByUapId = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+  console.log(id);
+  try {
+    connectToDB();
+    await Routine.deleteOne({ uap_id: id });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to delete user!");
+  }
+  revalidatePath("/");
+};

@@ -1,4 +1,5 @@
 "use client";
+import { Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +19,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PlusCircle, Clock, Users, DoorOpen } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
-
+import { deleteRoutineByUapId } from "@/app/lib/actions";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Mail, User, Key, Shield } from "lucide-react";
@@ -167,6 +169,18 @@ export default function ProfilePage({ userData, routineData }) {
                                 {entry.Status.charAt(0).toUpperCase() +
                                   entry.Status.slice(1)}
                               </Badge>
+                            </TableCell>
+                            <TableCell className="text-left">
+                              <form action={deleteRoutineByUapId}>
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  value={entry.uap_id}
+                                />
+                                <Button variant="outline" size="icon">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </form>
                             </TableCell>
                             <TableCell>
                               <Select
