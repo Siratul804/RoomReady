@@ -9,8 +9,9 @@ import { User } from "../lib/models";
 import { signOut } from "@/app/auth";
 
 export const addUser = async (prevState, formData) => {
-  const { uap_id, email, password, isAdmin } = Object.fromEntries(formData);
-  console.log(uap_id, email, password, isAdmin);
+  const { uap_id, email, password, isAdmin, batch, section } =
+    Object.fromEntries(formData);
+  console.log(uap_id, email, password, isAdmin, batch, section);
   try {
     connectToDB();
 
@@ -21,10 +22,13 @@ export const addUser = async (prevState, formData) => {
       uap_id,
       email,
       password: hashedPassword,
+      batch,
+      section,
       isAdmin,
     });
 
     await newUser.save();
+    console.log(newUser);
   } catch (err) {
     console.log(err);
 
@@ -50,7 +54,9 @@ export const authenticate = async (prevState, formData) => {
   } catch (error) {
     if (error.type === "CredentialsSignin") {
       console.log("Wrong Credentials");
-      return "Wrong Credentials";
+      return {
+        message: "Wrong Credentials",
+      };
     }
     redirect("/dashboard");
     throw error;
@@ -61,12 +67,11 @@ export const logout_user = async () => {
   await signOut();
 };
 
-export const addRoutine = async (formData) => {
+export const addRoutine = async (prevState, formData) => {
   const { Batch, Section, RoomNumber, StartedTime, EndTime, uap_id } =
     Object.fromEntries(formData);
   console.log(Batch, Section, RoomNumber, StartedTime, EndTime, uap_id);
   const Status = "Busy";
-  const Statuss = "available";
 
   try {
     connectToDB();
@@ -84,9 +89,13 @@ export const addRoutine = async (formData) => {
     await newRoutine.save();
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to create routine!");
+    return {
+      message: "Failed to create routine",
+    };
   }
 
   revalidatePath("/");
-  redirect("/");
+  return {
+    message: "Routine Created",
+  };
 };

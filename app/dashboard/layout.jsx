@@ -4,7 +4,7 @@ import { auth } from "@/app/auth";
 
 const Layout = async ({ children }) => {
   const { user } = await auth();
-  console.log(user);
+  // console.log(user);
 
   return (
     <>

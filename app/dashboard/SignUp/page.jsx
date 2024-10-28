@@ -69,7 +69,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex  justify-center p-10 ">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-lg font-bold text-left">
@@ -150,6 +150,34 @@ export default function Dashboard() {
                 Passwords do not match
               </p>
             )}
+            <div className="space-y-2">
+              <Label htmlFor="uap_id">Batch NO</Label>
+              <Input
+                id="batch"
+                type="number"
+                name="batch"
+                placeholder="Enter Your Batch NO"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <div className="pt-1">
+                <Label htmlFor="section">Section</Label>
+              </div>
+              <Select name="section" id="section">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Your Section" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="A">A</SelectItem>
+                  <SelectItem value="B">B</SelectItem>
+                  <SelectItem value="C">C</SelectItem>
+                  <SelectItem value="D">D</SelectItem>
+                  <SelectItem value="E">E</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <div className="space-y-2">
               <div className="pt-1">
                 <Label htmlFor="isAdmin">Is Admin</Label>

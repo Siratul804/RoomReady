@@ -5,15 +5,48 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import toast from "react-hot-toast";
+import { useFormState, useFormStatus } from "react-dom";
+import { useEffect, useRef, useState } from "react";
 
 function RoutineRoom({ user }) {
+  console.log(user);
+  function Submit() {
+    const { pending } = useFormStatus();
+    return (
+      <Button className="w-full" type="submit" disabled={pending}>
+        {pending ? "Adding..." : " Add Routine"}
+      </Button>
+    );
+  }
+
+  const initialState = {
+    message: "",
+  };
+
+  const [state, formAction] = useFormState(addRoutine, initialState);
+
+  const formRef = useRef();
+
+  useEffect(() => {
+    if (state?.message === "Routine Created") {
+      formRef.current.reset();
+      toast.success("Routine Created", {
+        style: {
+          background: "#008000",
+          color: "#fff",
+        },
+      });
+    } else if (state?.message === "Failed to create routine") {
+      toast.error("Failed to create routine", {
+        style: {
+          background: "#FF0000",
+          color: "#fff",
+        },
+      });
+    }
+  }, [state]);
+
   return (
     <div className="flex items-center justify-center min-h-screen ">
       <Card className="w-full max-w-md">
@@ -23,7 +56,7 @@ function RoutineRoom({ user }) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-2" action={addRoutine}>
+          <form className="space-y-2" action={formAction} ref={formRef}>
             <div className="space-y-2">
               <Input
                 id="number"
@@ -32,17 +65,26 @@ function RoutineRoom({ user }) {
                 value={user.uap_id}
                 className="hidden"
                 placeholder="Enter Your UAP ID"
-                required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Batch Number</Label>
               <Input
-                id="number"
+                id="batch"
                 type="number"
                 placeholder="Enter Your Batch Number"
+                className="hidden"
                 name="Batch"
-                required
+                value={user.batch}
+              />
+            </div>
+            <div className="space-y-2">
+              <Input
+                id="section"
+                type="text"
+                placeholder="Enter Your section "
+                className="hidden"
+                name="Section"
+                value={user.section}
               />
             </div>
             <div className="space-y-2">
@@ -75,24 +117,8 @@ function RoutineRoom({ user }) {
                 required
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="role">Select Section</Label>
-              <Select name="Section" id="section">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your section" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="A">A</SelectItem>
-                  <SelectItem value="B">B</SelectItem>
-                  <SelectItem value="C">C</SelectItem>
-                  <SelectItem value="D">D</SelectItem>
-                  <SelectItem value="E">E</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Button className="w-full" type="submit">
-              Add Routine
-            </Button>
+
+            <Submit />
           </form>
         </CardContent>
       </Card>

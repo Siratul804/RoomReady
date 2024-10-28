@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -67,11 +67,29 @@ export default function ProfilePage({ userData, routineData }) {
                   </Badge>
                 </div>
                 <Separator className="my-4" />
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground flex justify-center ">
                   {userData.isAdmin
                     ? "You have full administrative access to the system."
                     : "You have standard user access to the system."}
                 </p>
+                {userData.isAdmin ? (
+                  <>
+                    <Link
+                      href="/dashboard/SignUp"
+                      className="flex justify-center pt-2 "
+                    >
+                      <Badge variant="default" className="text-xs">
+                        {userData.isAdmin ? "Add User" : "Disabled"}
+                      </Badge>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Badge variant="default" className="text-xs">
+                      {userData.isAdmin ? "Add User" : "Disabled"}
+                    </Badge>
+                  </>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -90,6 +108,7 @@ export default function ProfilePage({ userData, routineData }) {
               </Button>
             </Link>
           </CardHeader>
+
           <CardContent>
             <div className="overflow-x-auto">
               <Table>
@@ -105,63 +124,77 @@ export default function ProfilePage({ userData, routineData }) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {routineData.map((entry) => (
-                    <TableRow key={entry.id}>
-                      <TableCell className="font-medium">
-                        {entry.Batch}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center">
-                          <DoorOpen className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.RoomNumber}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center">
-                          <Users className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.Section}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex items-center justify-end">
-                          <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.StartedTime}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex items-center justify-end">
-                          <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {entry.EndTime}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <Badge
-                          variant={
-                            entry.Status === "Busy" ? "destructive" : "success"
-                          }
-                        >
-                          {entry.Status.charAt(0).toUpperCase() +
-                            entry.Status.slice(1)}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Select
-                          onValueChange={(value) =>
-                            handleStatusChange(entry.id, value)
-                          }
-                          defaultValue={entry.Status}
-                        >
-                          <SelectTrigger className="w-[110px]">
-                            <SelectValue placeholder="Change status" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="busy">Busy</SelectItem>
-                            <SelectItem value="available">Available</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {routineData.length > 0 ? (
+                    <>
+                      {routineData.map((entry) => (
+                        <>
+                          <TableRow key={entry.id}>
+                            <TableCell className="font-medium">
+                              {entry.Batch}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center">
+                                <DoorOpen className="mr-2 h-4 w-4 text-muted-foreground" />
+                                {entry.RoomNumber}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center">
+                                <Users className="mr-2 h-4 w-4 text-muted-foreground" />
+                                {entry.Section}
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex items-center justify-end">
+                                <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
+                                {entry.StartedTime}
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex items-center justify-end">
+                                <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
+                                {entry.EndTime}
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <Badge
+                                variant={
+                                  entry.Status === "Busy"
+                                    ? "destructive"
+                                    : "success"
+                                }
+                              >
+                                {entry.Status.charAt(0).toUpperCase() +
+                                  entry.Status.slice(1)}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Select
+                                onValueChange={(value) =>
+                                  handleStatusChange(entry.id, value)
+                                }
+                                defaultValue={entry.Status}
+                              >
+                                <SelectTrigger className="w-[110px]">
+                                  <SelectValue placeholder="Change status" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="busy">Busy</SelectItem>
+                                  <SelectItem value="available">
+                                    Available
+                                  </SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <b className="text-xs">No data available</b>
+                    </>
+                  )}
                 </TableBody>
               </Table>
             </div>

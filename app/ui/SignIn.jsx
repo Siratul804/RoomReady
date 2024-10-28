@@ -31,8 +31,8 @@ const LoginForm = () => {
   const [state, formAction] = useFormState(authenticate, undefined);
 
   useEffect(() => {
-    if (state === "Wrong Credentials") {
-      toast("Please Provide Valid Information", {
+    if (state?.message === "Wrong Credentials") {
+      toast("Wrong Credentials", {
         style: {
           borderRadius: "10px",
           background: "red",
@@ -72,7 +72,7 @@ const LoginForm = () => {
                   name="password"
                   required
                 />
-                <Link className="pt-4 flex float-start text-xs" href="/forgot">
+                <Link className="pt-4 flex float-end text-xs" href="/forgot">
                   <p>Forgot Password ?</p>
                 </Link>
                 <Button
@@ -92,16 +92,6 @@ const LoginForm = () => {
               </div>
             </div>
             <Submit />
-
-            {state === "Wrong Credentials" ? (
-              <>
-                <p className="text-red-500 text-right text-sm">
-                  Wrong Credentials
-                </p>
-              </>
-            ) : (
-              <></>
-            )}
 
             <p className="text-center text-sm">
               Copyright © 2023 Room Ready. All rights reserved

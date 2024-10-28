@@ -55,6 +55,8 @@ export const { signIn, signOut, auth } = NextAuth({
         token.email = user.email;
         token.uap_id = user.uap_id;
         token.isAdmin = user.isAdmin;
+        token.batch = user.batch;
+        token.section = user.section;
       }
       // console.log(token);
       return token;
@@ -64,6 +66,8 @@ export const { signIn, signOut, auth } = NextAuth({
         session.user.email = token.email;
         session.user.uap_id = token.uap_id;
         session.user.isAdmin = token.isAdmin;
+        session.user.batch = token.batch;
+        session.user.section = token.section;
       }
       return session;
     },
