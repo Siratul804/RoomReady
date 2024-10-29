@@ -196,7 +196,7 @@ export default function Dashboard() {
               <Submit />
             </div>
 
-            <div className="flex justify-end pt-1 ">
+            {/* <div className="flex justify-end pt-1 ">
               {state?.message === "Already Exits" ? (
                 <>
                   <p className="text-red-500 text-sm"> User Already Exits ! </p>
@@ -204,7 +204,7 @@ export default function Dashboard() {
               ) : (
                 <></>
               )}
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>

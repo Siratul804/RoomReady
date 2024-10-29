@@ -26,12 +26,14 @@ function RoutineRoom({ user }) {
 
   const [state, formAction] = useFormState(addRoutine, initialState);
 
+  console.log(state);
+
   const formRef = useRef();
 
   useEffect(() => {
-    if (state?.message === "Routine Created") {
+    if (state?.message === "Routine created successfully") {
       formRef.current.reset();
-      toast.success("Routine Created", {
+      toast.success("Routine created successfully", {
         style: {
           background: "#008000",
           color: "#fff",

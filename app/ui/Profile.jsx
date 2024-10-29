@@ -1,5 +1,4 @@
 "use client";
-import { Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,20 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { PlusCircle, Clock, Users, DoorOpen } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { deleteRoutineByUapId } from "@/app/lib/actions";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Mail, User, Key, Shield } from "lucide-react";
+import StatusModal from "./StatusModal";
+import DeleteModal from "./DeleteModal";
 
 export default function ProfilePage({ userData, routineData }) {
   return (
@@ -170,35 +163,9 @@ export default function ProfilePage({ userData, routineData }) {
                                   entry.Status.slice(1)}
                               </Badge>
                             </TableCell>
-                            <TableCell className="text-left">
-                              <form action={deleteRoutineByUapId}>
-                                <input
-                                  type="hidden"
-                                  name="id"
-                                  value={entry.uap_id}
-                                />
-                                <Button variant="outline" size="icon">
-                                  <Trash2 className="h-4 w-4" />
-                                </Button>
-                              </form>
-                            </TableCell>
-                            <TableCell>
-                              <Select
-                                onValueChange={(value) =>
-                                  handleStatusChange(entry.id, value)
-                                }
-                                defaultValue={entry.Status}
-                              >
-                                <SelectTrigger className="w-[110px]">
-                                  <SelectValue placeholder="Change status" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="busy">Busy</SelectItem>
-                                  <SelectItem value="available">
-                                    Available
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
+                            <TableCell className="text-left flex  ">
+                              <DeleteModal uap_id={entry.uap_id} />
+                              <StatusModal />
                             </TableCell>
                           </TableRow>
                         </>
