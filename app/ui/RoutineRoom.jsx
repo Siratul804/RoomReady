@@ -1,13 +1,13 @@
 "use client";
 import { addRoutine } from "@/app/lib/actions";
-
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import { useFormState, useFormStatus } from "react-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 function RoutineRoom({ user }) {
   console.log(user);
@@ -20,26 +20,29 @@ function RoutineRoom({ user }) {
     );
   }
 
-  const initialState = {
-    message: "",
-  };
+  const router = useRouter();
 
-  const [state, formAction] = useFormState(addRoutine, initialState);
+  const [createPostState, createPostAction] = useFormState(addRoutine, {
+    error: null,
+    success: false,
+  });
 
-  console.log(state);
+  console.log(createPostState);
 
   const formRef = useRef();
-
   useEffect(() => {
-    if (state?.message === "Routine created successfully") {
+    if (createPostState.success) {
       formRef.current.reset();
+      router.push("/dashboard/profile");
       toast.success("Routine created successfully", {
         style: {
           background: "#008000",
           color: "#fff",
         },
       });
-    } else if (state?.message === "Failed to create routine") {
+    }
+
+    if (createPostState.error) {
       toast.error("Failed to create routine", {
         style: {
           background: "#FF0000",
@@ -47,7 +50,7 @@ function RoutineRoom({ user }) {
         },
       });
     }
-  }, [state]);
+  }, [createPostState]);
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
@@ -58,7 +61,7 @@ function RoutineRoom({ user }) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-2" action={formAction} ref={formRef}>
+          <form className="space-y-2" action={createPostAction} ref={formRef}>
             <div className="space-y-2">
               <Input
                 id="number"

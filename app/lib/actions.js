@@ -88,18 +88,17 @@ export const addRoutine = async (prevState, formData) => {
 
     await newRoutine.save();
 
+    // Return a success message
     revalidatePath("/dashboard/profile");
 
-    // Return a success message
-
-    return "Routine created successfully";
+    if (newRoutine) {
+      return { error: null, success: true };
+    }
+    redirect("/dashboard/profile");
   } catch (err) {
     console.error(err);
     // Return an error message
-    return "Failed to create routine";
-  } finally {
-    // Redirect after the try/catch block
-    redirect("/dashboard/profile");
+    return { error: "Enter the title!", success: false };
   }
 };
 
