@@ -25,3 +25,16 @@ export const fetchRoutineByUapId = async (uap_id) => {
     throw new Error("Failed to fetch routine by uap_id!");
   }
 };
+
+export const fetchRoutineByStatus = async () => {
+  try {
+    connectToDB();
+    // Use the `uap_id` parameter to filter the results
+    const routine = await Routine.find({ Status: "Available" });
+    console.log(routine);
+    return routine;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch routine by uap_id!");
+  }
+};

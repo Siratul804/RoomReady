@@ -1,10 +1,10 @@
 import HomePage from "@/app/ui/Home";
-import { auth } from "@/app/auth";
-
+import { fetchRoutineByStatus } from "@/app/lib/data";
 const Dashboard = async () => {
+  const AvaRoutine = await fetchRoutineByStatus();
   return (
     <div className="p-5">
-      <HomePage />
+      <HomePage Routine={AvaRoutine} />
     </div>
   );
 };
