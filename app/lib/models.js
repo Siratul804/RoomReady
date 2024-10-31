@@ -37,6 +37,7 @@ const RoutineSchema = new mongoose.Schema({
   Batch: Number,
   RoomNumber: String,
   Section: String,
+  Day: String,
   StartedTime: String,
   EndTime: String,
   Status: String,

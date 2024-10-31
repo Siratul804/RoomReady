@@ -4,8 +4,9 @@ import { deleteRoutineByUapId } from "@/app/lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-
-function DeleteModal({ uap_id }) {
+// import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+function DeleteModal({ uap_id, room }) {
   function Submit() {
     const { pending } = useFormStatus();
     return (
@@ -16,13 +17,38 @@ function DeleteModal({ uap_id }) {
     );
   }
 
-  const initialState = {
-    message: "",
-  };
+  // const router = useRouter();
 
-  const [state, formAction] = useFormState(deleteRoutineByUapId, initialState);
+  const [state, formAction] = useFormState(deleteRoutineByUapId, {
+    error: null,
+    success: false,
+  });
 
+  console.log(state);
   const formRef = useRef();
+
+  useEffect(() => {
+    if (state.success) {
+      formRef.current.reset();
+      // router.push("/dashboard/profile");
+      Dialog.Close();
+      toast.success("Routine deleted successfully", {
+        style: {
+          background: "#008000",
+          color: "#fff",
+        },
+      });
+    }
+
+    if (state.error) {
+      toast.error("Failed to delete routine", {
+        style: {
+          background: "#FF0000",
+          color: "#fff",
+        },
+      });
+    }
+  }, [state]);
 
   return (
     <>
@@ -36,8 +62,8 @@ function DeleteModal({ uap_id }) {
           <DialogContent className="sm:max-w-[425px]">
             <form action={formAction} ref={formRef}>
               <input type="hidden" name="id" value={uap_id} />
-              <div className="flex justify-evenly items-center ">
-                <p>Are you sure ?</p>
+              <div className="flex flex-col justify-evenly items-center ">
+                <p className="py-4">Are you want to delete room {room} ? </p>
                 <Submit />
               </div>
             </form>

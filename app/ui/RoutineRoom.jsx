@@ -8,6 +8,13 @@ import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect, useRef } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function RoutineRoom({ user }) {
   console.log(user);
@@ -91,6 +98,21 @@ function RoutineRoom({ user }) {
                 name="Section"
                 value={user.section}
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="room_num">Select Day </Label>
+              <Select name="Day" id="Day">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Day" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Sunday">Sunday</SelectItem>
+                  <SelectItem value="Monday">Monday</SelectItem>
+                  <SelectItem value="Tuesday">Tuesday</SelectItem>
+                  <SelectItem value="Wednesday">Wednesday</SelectItem>
+                  <SelectItem value="Thursday">Thursday</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="room_num">Room Number</Label>

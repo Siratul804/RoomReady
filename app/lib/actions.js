@@ -68,9 +68,9 @@ export const logout_user = async () => {
 };
 
 export const addRoutine = async (prevState, formData) => {
-  const { Batch, Section, RoomNumber, StartedTime, EndTime, uap_id } =
+  const { Batch, Section, RoomNumber, Day, StartedTime, EndTime, uap_id } =
     Object.fromEntries(formData);
-  console.log(Batch, Section, RoomNumber, StartedTime, EndTime, uap_id);
+  console.log(Batch, Section, RoomNumber, Day, StartedTime, EndTime, uap_id);
   const Status = "Busy";
 
   try {
@@ -80,6 +80,7 @@ export const addRoutine = async (prevState, formData) => {
       uap_id,
       Batch,
       Section,
+      Day,
       RoomNumber,
       StartedTime,
       EndTime,
@@ -98,7 +99,7 @@ export const addRoutine = async (prevState, formData) => {
   } catch (err) {
     console.error(err);
     // Return an error message
-    return { error: "Enter the title!", success: false };
+    return { error: "Routine added failed!", success: false };
   }
 };
 
@@ -108,13 +109,17 @@ export const deleteRoutineByUapId = async (prevState, formData) => {
   try {
     connectToDB();
 
-    await Routine.deleteOne({ uap_id: id });
+    const deleteUser = await Routine.deleteOne({ uap_id: id });
+    if (deleteUser) {
+      revalidatePath("/");
+    }
+    if (deleteUser) {
+      return { error: null, success: true };
+    }
   } catch (err) {
     console.log(err);
+    return { error: "Routine deleted failed!", success: false };
   }
-
-  revalidatePath("/");
-  redirect("/dashboard/profile");
 };
 
 export const updateRoutineByUapId = async (formData) => {

@@ -109,9 +109,10 @@ export default function ProfilePage({ userData, routineData }) {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[100px]">Batch</TableHead>
+                    <TableHead className="">Batch</TableHead>
                     <TableHead>Room</TableHead>
                     <TableHead>Section</TableHead>
+                    <TableHead>Day</TableHead>
                     <TableHead className="text-right">Start Time</TableHead>
                     <TableHead className="text-right">End Time</TableHead>
                     <TableHead className="text-center">Status</TableHead>
@@ -139,6 +140,11 @@ export default function ProfilePage({ userData, routineData }) {
                                 {entry.Section}
                               </div>
                             </TableCell>
+                            <TableCell>
+                              <div className="flex items-center">
+                                {entry.Day}
+                              </div>
+                            </TableCell>
                             <TableCell className="text-right">
                               <div className="flex items-center justify-end">
                                 <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
@@ -164,7 +170,10 @@ export default function ProfilePage({ userData, routineData }) {
                               </Badge>
                             </TableCell>
                             <TableCell className="text-left flex  ">
-                              <DeleteModal uap_id={entry.uap_id} />
+                              <DeleteModal
+                                uap_id={entry.uap_id}
+                                room={entry.RoomNumber}
+                              />
                               <StatusModal />
                             </TableCell>
                           </TableRow>
