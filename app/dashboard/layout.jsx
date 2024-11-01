@@ -1,3 +1,4 @@
+import Footer from "../ui/Footer";
 import { Navbar } from "../ui/Navbar";
 
 import { auth } from "@/app/auth";
@@ -10,6 +11,7 @@ const Layout = async ({ children }) => {
     <>
       <Navbar />
       <div>{children}</div>
+      <Footer />
     </>
   );
 };

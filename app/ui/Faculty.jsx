@@ -15,8 +15,8 @@ const faculties = [
     name: "Dr. Engr. Shah Murtaza Rashid Al Masud",
     department: "Computer Science and Engineering",
     position: "Professor",
-    email: "emily.johnson@university.edu",
-    phone: "+1 (555) 123-4567",
+    email: "murtaza@uap-bd.edu",
+    phone: "01405688649",
     imageUrl:
       "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=RfilYIgAAAAJ&citpid=1",
   },
@@ -25,8 +25,8 @@ const faculties = [
     name: "Dr. Bilkis Jamal Ferdosi",
     department: "Computer Science and Engineering",
     position: "Professor",
-    email: "michael.chen@university.edu",
-    phone: "+1 (555) 987-6543",
+    email: "bjferdosi@uap-bd.edu",
+    phone: "0176042388",
     imageUrl:
       "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=QaITgeIAAAAJ&citpid=2",
   },
@@ -35,8 +35,8 @@ const faculties = [
     name: "Prof. Dr. Aloke Kumar Saha",
     department: "Computer Science and Engineering",
     position: "Professor",
-    email: "sarah.patel@university.edu",
-    phone: "+1 (555) 246-8135",
+    email: "aloke@uap-bd.edu",
+    phone: "01711465641",
     imageUrl:
       "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=a9t8g-AAAAAJ&citpid=10",
   },
@@ -45,8 +45,8 @@ const faculties = [
     name: "Dr. Nasima Begum",
     department: "Computer Science and Engineering",
     position: "Associate Professor",
-    email: "sarah.patel@university.edu",
-    phone: "+1 (555) 246-8135",
+    email: "nasima.cse@uap-bd.edu",
+    phone: "01816203075",
     imageUrl:
       "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=i1GeAwcAAAAJ&citpid=3",
   },
