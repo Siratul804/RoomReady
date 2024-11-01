@@ -174,7 +174,7 @@ export default function ProfilePage({ userData, routineData }) {
                                 uap_id={entry.uap_id}
                                 room={entry.RoomNumber}
                               />
-                              <StatusModal />
+                              <StatusModal routineData={entry} />
                             </TableCell>
                           </TableRow>
                         </>

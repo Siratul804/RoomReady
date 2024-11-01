@@ -29,9 +29,8 @@ function DeleteModal({ uap_id, room }) {
 
   useEffect(() => {
     if (state.success) {
-      formRef.current.reset();
-      // router.push("/dashboard/profile");
-      Dialog.Close();
+      formRef.current?.click();
+
       toast.success("Routine deleted successfully", {
         style: {
           background: "#008000",
@@ -54,13 +53,13 @@ function DeleteModal({ uap_id, room }) {
     <>
       <div className="pl-2">
         <Dialog>
-          <DialogTrigger asChild>
+          <DialogTrigger asChild ref={formRef}>
             <Button variant="outline" size="icon">
               <Trash2 className="h-4 w-4" />
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
-            <form action={formAction} ref={formRef}>
+            <form action={formAction}>
               <input type="hidden" name="id" value={uap_id} />
               <div className="flex flex-col justify-evenly items-center ">
                 <p className="py-4">Are you want to delete room {room} ? </p>

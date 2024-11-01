@@ -9,9 +9,57 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Users, DoorOpen, CalendarFold } from "lucide-react";
+import { updateRoutineByUapIdOnlyStatus } from "@/app/lib/actions";
+import toast from "react-hot-toast";
+import { useFormState, useFormStatus } from "react-dom";
+import { useEffect } from "react";
 
 export default function HomePage({ Routine }) {
   console.log(Routine);
+
+  function Submit() {
+    const { pending } = useFormStatus();
+    return (
+      <Button
+        className="w-full"
+        variant="outline"
+        type="submit"
+        disabled={pending}
+      >
+        {pending ? "Marking..." : "Mark as Busy"}
+      </Button>
+    );
+  }
+
+  const [updatePostState, updatePostAction] = useFormState(
+    updateRoutineByUapIdOnlyStatus,
+    {
+      error: null,
+      success: false,
+    }
+  );
+
+  console.log(updatePostState);
+
+  useEffect(() => {
+    if (updatePostState.success) {
+      toast.success("Marked as Busy", {
+        style: {
+          background: "#008000",
+          color: "#fff",
+        },
+      });
+    }
+
+    if (updatePostState.error) {
+      toast.error("Failed Mark", {
+        style: {
+          background: "#FF0000",
+          color: "#fff",
+        },
+      });
+    }
+  }, [updatePostState]);
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -52,9 +100,16 @@ export default function HomePage({ Routine }) {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
-                  Mark as Busy
-                </Button>
+                <form className="w-full" action={updatePostAction}>
+                  <input id="id" name="id" value={val._id} className="hidden" />
+                  <input
+                    id="id"
+                    name="Status"
+                    value="Busy"
+                    className="hidden"
+                  />
+                  <Submit />
+                </form>
               </CardFooter>
             </Card>
           </>

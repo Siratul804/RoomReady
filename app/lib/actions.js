@@ -110,10 +110,9 @@ export const deleteRoutineByUapId = async (prevState, formData) => {
     connectToDB();
 
     const deleteUser = await Routine.deleteOne({ uap_id: id });
+
     if (deleteUser) {
       revalidatePath("/");
-    }
-    if (deleteUser) {
       return { error: null, success: true };
     }
   } catch (err) {
@@ -122,18 +121,55 @@ export const deleteRoutineByUapId = async (prevState, formData) => {
   }
 };
 
-export const updateRoutineByUapId = async (formData) => {
-  const { id, status } = Object.fromEntries(formData);
-
+// export const updateRoutineByUapId = async (prevState, formData) => {
+//   const { id, Status, Day } = Object.fromEntries(formData);
+//   console.log(id, Status, Day);
+// };
+export const updateRoutineByUapId = async (prevState, formData) => {
+  const { RoomNumber, Day, StartedTime, EndTime, Status, id } =
+    Object.fromEntries(formData);
+  console.log(RoomNumber, Day, StartedTime, EndTime, Status, id);
   try {
     connectToDB();
 
-    await Routine.findByIdAndUpdate(id, status);
+    const updateFields = {
+      RoomNumber,
+      Day,
+      StartedTime,
+      EndTime,
+      Status,
+    };
+
+    const UpdateRoutine = await Routine.findByIdAndUpdate(id, updateFields);
+    if (UpdateRoutine) {
+      revalidatePath("/dashboard/products");
+      return { error: null, success: true };
+    }
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to update product!");
+    return { error: "Routine update failed!", success: false };
   }
+};
 
-  revalidatePath("/dashboard/products");
-  redirect("/dashboard/products");
+export const updateRoutineByUapIdOnlyStatus = async (prevState, formData) => {
+  const { Status, id } = Object.fromEntries(formData);
+  console.log(Status, id);
+  try {
+    connectToDB();
+
+    const UpdateRoutine = await Routine.findByIdAndUpdate(
+      id,
+      { Status: Status },
+      {
+        new: true,
+      }
+    );
+    if (UpdateRoutine) {
+      revalidatePath("/dashboard");
+      return { error: null, success: true };
+    }
+  } catch (err) {
+    console.log(err);
+    return { error: "Routine update failed!", success: false };
+  }
 };
