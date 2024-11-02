@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         >
           {children}
         </ThemeProvider>
-        <Toaster position="bottom-right" />
+        <Toaster toastOptions={{ duration: 5000 }} position="bottom-right" />
       </body>
     </html>
   );
