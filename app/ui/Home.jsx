@@ -62,11 +62,11 @@ export default function HomePage({ Routine }) {
   }, [updatePostState]);
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="container mx-auto py-10 px-4  ">
       <h1 className="text-4xl font-bold mb-8 text-center">Available Classes</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Routine.length > 0 ? (
-          <>
+      {Routine.length > 0 ? (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10 ">
             {Routine.map((val) => (
               <>
                 <Card
@@ -76,7 +76,9 @@ export default function HomePage({ Routine }) {
                   <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                       <span> Batch : {val.Batch}</span>
-                      <Badge variant="outline">{val.Status}</Badge>
+                      <Badge variant="outline">
+                        {val.Status === "Available" ? "Available" : "Occupied"}
+                      </Badge>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -121,15 +123,15 @@ export default function HomePage({ Routine }) {
                 </Card>
               </>
             ))}
-          </>
-        ) : (
-          <>
-            <div className="h-[34vh]">
-              <b className="text-lg">No data available</b>
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="h-[38vh] flex justify-center items-center ">
+            <b className="text-center ">No available classes </b>
+          </div>
+        </>
+      )}
     </div>
   );
 }

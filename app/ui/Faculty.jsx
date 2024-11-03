@@ -59,7 +59,7 @@ export default function FacultyInfoPage() {
         Faculty Information
       </h1>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {faculties.map((faculty) => (
           <Card key={faculty.id}>
             <CardHeader>
@@ -84,12 +84,22 @@ export default function FacultyInfoPage() {
                 <Badge>{faculty.department}</Badge>
                 <div className="space-y-2">
                   <div className="flex items-center">
-                    <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{faculty.email}</span>
+                    <a
+                      href={`mailto:${faculty.email}`}
+                      className="flex items-center justify-center "
+                    >
+                      <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm">{faculty.email}</span>
+                    </a>
                   </div>
                   <div className="flex items-center">
-                    <Phone className="mr-2 h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{faculty.phone}</span>
+                    <a
+                      href={`tel:${faculty.phone}`}
+                      className="flex items-center justify-center "
+                    >
+                      <Phone className="mr-2 h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm">{faculty.phone}</span>
+                    </a>
                   </div>
                 </div>
               </div>

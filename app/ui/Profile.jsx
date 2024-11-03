@@ -165,8 +165,9 @@ export default function ProfilePage({ userData, routineData }) {
                                     : "success"
                                 }
                               >
-                                {entry.Status.charAt(0).toUpperCase() +
-                                  entry.Status.slice(1)}
+                                {entry.Status === "Available"
+                                  ? "Available"
+                                  : "Occupied"}
                               </Badge>
                             </TableCell>
                             <TableCell className="text-left flex  ">

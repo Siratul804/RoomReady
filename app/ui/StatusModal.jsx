@@ -151,7 +151,7 @@ function StatusModal({ routineData }) {
                     <SelectValue placeholder="Select Status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Busy">Busy</SelectItem>
+                    <SelectItem value="Busy">Occupied</SelectItem>
                     <SelectItem value="Available">Available</SelectItem>
                   </SelectContent>
                 </Select>
