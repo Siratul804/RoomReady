@@ -23,7 +23,7 @@ const LoginForm = () => {
 
     return (
       <Button className="w-full" type="submit">
-        {pending ? "Logining..." : "Sign In"}
+        {pending ? "Signing..." : "Sign In"}
       </Button>
     );
   }

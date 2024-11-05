@@ -26,7 +26,7 @@ export default function HomePage({ Routine, userData }) {
         type="submit"
         disabled={pending}
       >
-        {pending ? "Marking..." : "Mark as Busy"}
+        {pending ? "Occupying..." : "Occupy the room"}
       </Button>
     );
   }
