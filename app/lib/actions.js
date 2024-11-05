@@ -142,7 +142,7 @@ export const updateRoutineByUapId = async (prevState, formData) => {
 
     const UpdateRoutine = await Routine.findByIdAndUpdate(id, updateFields);
     if (UpdateRoutine) {
-      revalidatePath("/dashboard/products");
+      revalidatePath("/dashboard/profile");
       return { error: null, success: true };
     }
   } catch (err) {
@@ -152,20 +152,20 @@ export const updateRoutineByUapId = async (prevState, formData) => {
 };
 
 export const updateRoutineByUapIdOnlyStatus = async (prevState, formData) => {
-  const { Status, id } = Object.fromEntries(formData);
-  console.log(Status, id);
+  const { Status, id, BusyBy } = Object.fromEntries(formData);
+  console.log(Status, id, BusyBy);
   try {
     connectToDB();
 
     const UpdateRoutine = await Routine.findByIdAndUpdate(
       id,
-      { Status: Status },
+      { Status: Status, BusyBy: BusyBy },
       {
         new: true,
       }
     );
     if (UpdateRoutine) {
-      revalidatePath("/dashboard");
+      revalidatePath("/dashboard/profile");
       return { error: null, success: true };
     }
   } catch (err) {

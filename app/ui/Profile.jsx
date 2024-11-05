@@ -116,6 +116,7 @@ export default function ProfilePage({ userData, routineData }) {
                     <TableHead className="text-right">Start Time</TableHead>
                     <TableHead className="text-right">End Time</TableHead>
                     <TableHead className="text-center">Status</TableHead>
+                    <TableHead className="text-center">Occupied by</TableHead>
                     <TableHead>Action</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -169,6 +170,9 @@ export default function ProfilePage({ userData, routineData }) {
                                   ? "Available"
                                   : "Occupied"}
                               </Badge>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              {entry.BusyBy || entry.uap_id}
                             </TableCell>
                             <TableCell className="text-left flex  ">
                               <DeleteModal

@@ -41,6 +41,7 @@ const RoutineSchema = new mongoose.Schema({
   StartedTime: String,
   EndTime: String,
   Status: String,
+  BusyBy: Number,
 });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
