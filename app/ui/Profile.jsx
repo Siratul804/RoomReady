@@ -99,7 +99,7 @@ export default function ProfilePage({ userData, routineData }) {
             </CardTitle>
             <Link href="/dashboard/routine">
               <Button className="w-full sm:w-auto">
-                <PlusCircle className="mr-2 h-5 w-5" /> Add New Entry
+                <PlusCircle className="mr-2 h-5 w-5" /> Add Routine
               </Button>
             </Link>
           </CardHeader>

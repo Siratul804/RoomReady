@@ -1,5 +1,5 @@
 "use client";
-
+import { CircleUserRound } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -82,9 +82,8 @@ export function Navbar() {
             </DropdownMenu>
           </div>
           <Link href="/dashboard/profile">
-            <Avatar>
-              <AvatarImage src="/placeholder-avatar.jpg" alt="@user" />
-              <AvatarFallback>U</AvatarFallback>
+            <Avatar className="flex justify-center items-center">
+              <CircleUserRound className="w-8 h-8" />
             </Avatar>
           </Link>
           <div className="pl-3">
