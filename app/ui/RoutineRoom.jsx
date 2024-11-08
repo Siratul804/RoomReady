@@ -64,7 +64,7 @@ function RoutineRoom({ user }) {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            Add New Entry
+            Add New Routine
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -124,11 +124,13 @@ function RoutineRoom({ user }) {
                 required
               />
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="start_time">Started Time</Label>
+
               <Input
                 id="started_time"
-                type="text"
+                type="time"
                 placeholder="Enter Your Started Time"
                 name="StartedTime"
                 required
@@ -138,7 +140,7 @@ function RoutineRoom({ user }) {
               <Label htmlFor="room_num">Ended Time</Label>
               <Input
                 id="end_time"
-                type="text"
+                type="time"
                 placeholder="Enter Your End Time"
                 name="EndTime"
                 required

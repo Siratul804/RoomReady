@@ -67,10 +67,32 @@ export const logout_user = async () => {
   await signOut();
 };
 
+function formatTimeTo12Hour(time) {
+  let [hours, minutes] = time.split(":");
+  hours = parseInt(hours);
+
+  const suffix = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12; // Convert hour from 24-hour to 12-hour format
+
+  return `${hours}:${minutes} ${suffix}`;
+}
+
 export const addRoutine = async (prevState, formData) => {
   const { Batch, Section, RoomNumber, Day, StartedTime, EndTime, uap_id } =
     Object.fromEntries(formData);
-  console.log(Batch, Section, RoomNumber, Day, StartedTime, EndTime, uap_id);
+  // Format StartedTime and EndTime to 12-hour format
+  const formattedStartedTime = formatTimeTo12Hour(StartedTime);
+  const formattedEndTime = formatTimeTo12Hour(EndTime);
+
+  console.log(
+    Batch,
+    Section,
+    RoomNumber,
+    Day,
+    formattedStartedTime,
+    formattedEndTime,
+    uap_id
+  );
   const Status = "Busy";
 
   try {
@@ -82,8 +104,8 @@ export const addRoutine = async (prevState, formData) => {
       Section,
       Day,
       RoomNumber,
-      StartedTime,
-      EndTime,
+      StartedTime: formattedStartedTime,
+      EndTime: formattedEndTime,
       Status,
     });
 
@@ -104,12 +126,12 @@ export const addRoutine = async (prevState, formData) => {
 };
 
 export const deleteRoutineByUapId = async (prevState, formData) => {
-  const { id } = Object.fromEntries(formData);
-  console.log(id);
+  const { room } = Object.fromEntries(formData);
+  console.log(room);
   try {
     connectToDB();
 
-    const deleteUser = await Routine.deleteOne({ uap_id: id });
+    const deleteUser = await Routine.deleteOne({ RoomNumber: room });
 
     if (deleteUser) {
       revalidatePath("/");
@@ -125,6 +147,7 @@ export const deleteRoutineByUapId = async (prevState, formData) => {
 //   const { id, Status, Day } = Object.fromEntries(formData);
 //   console.log(id, Status, Day);
 // };
+
 export const updateRoutineByUapId = async (prevState, formData) => {
   const { RoomNumber, Day, StartedTime, EndTime, Status, id } =
     Object.fromEntries(formData);

@@ -60,7 +60,7 @@ function DeleteModal({ uap_id, room }) {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <form action={formAction}>
-              <input type="hidden" name="id" value={uap_id} />
+              <input type="hidden" name="room" value={room} />
               <div className="flex flex-col justify-evenly items-center ">
                 <p className="py-4">Are you want to delete room {room} ? </p>
                 <Submit />
