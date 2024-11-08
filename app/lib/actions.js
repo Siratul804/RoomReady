@@ -80,6 +80,7 @@ function formatTimeTo12Hour(time) {
 export const addRoutine = async (prevState, formData) => {
   const { Batch, Section, RoomNumber, Day, StartedTime, EndTime, uap_id } =
     Object.fromEntries(formData);
+
   // Format StartedTime and EndTime to 12-hour format
   const formattedStartedTime = formatTimeTo12Hour(StartedTime);
   const formattedEndTime = formatTimeTo12Hour(EndTime);
@@ -96,8 +97,29 @@ export const addRoutine = async (prevState, formData) => {
   const Status = "Busy";
 
   try {
+    // Connect to the database
     await connectToDB();
 
+    // Fetch existing routines
+    const routineData = await Routine.find();
+
+    // Check if a routine with the same Day, StartedTime, and EndTime already exists
+    const duplicateRoutine = routineData.find(
+      (routine) =>
+        routine.Day === Day &&
+        routine.StartedTime === formattedStartedTime &&
+        routine.EndTime === formattedEndTime
+    );
+
+    if (duplicateRoutine) {
+      return {
+        error:
+          "Routine already exists with the same Day, StartedTime, and EndTime!",
+        success: false,
+      };
+    }
+
+    // If no duplicates, create a new routine
     const newRoutine = new Routine({
       uap_id,
       Batch,
@@ -111,17 +133,13 @@ export const addRoutine = async (prevState, formData) => {
 
     await newRoutine.save();
 
-    // Return a success message
+    // Revalidate and redirect on success
     revalidatePath("/dashboard/profile");
-
-    if (newRoutine) {
-      return { error: null, success: true };
-    }
-    redirect("/dashboard/profile");
+    return { error: null, success: true };
   } catch (err) {
     console.error(err);
     // Return an error message
-    return { error: "Routine added failed!", success: false };
+    return { error: "Routine addition failed!", success: false };
   }
 };
 

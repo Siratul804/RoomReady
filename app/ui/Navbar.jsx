@@ -16,12 +16,24 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { useFormState, useFormStatus } from "react-dom";
 import { logout_user } from "@/app/lib/actions";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
+
+  function Submit() {
+    const { pending } = useFormStatus();
+
+    return (
+      <Button className="w-full" type="submit">
+        {pending ? "Leaving..." : "Log Out"}
+      </Button>
+    );
+  }
+
+  const [state, formAction] = useFormState(logout_user, undefined);
 
   const NavItems = React.useCallback(
     () => (
@@ -135,7 +147,7 @@ export function Navbar() {
                   <Link href="/dashboard/profile">Profile</Link>
                 </Button>
                 <div className="flex justify-center">
-                  <form action={logout_user} className="">
+                  <form action={formAction} className="">
                     <Button>Log Out</Button>
                   </form>
                 </div>

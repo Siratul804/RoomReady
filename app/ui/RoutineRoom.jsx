@@ -50,7 +50,7 @@ function RoutineRoom({ user }) {
     }
 
     if (createPostState.error) {
-      toast.error("Failed to create routine", {
+      toast.error(createPostState.error, {
         style: {
           background: "#FF0000",
           color: "#fff",
