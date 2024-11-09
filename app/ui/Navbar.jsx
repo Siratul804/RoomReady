@@ -52,6 +52,13 @@ export function Navbar() {
         >
           <Link href="/dashboard/faculty">Faculty</Link>
         </Button>
+        <Button
+          variant="ghost"
+          asChild
+          className={cn(pathname === "/dashboard/maps" && "bg-muted")}
+        >
+          <Link href="/dashboard/maps">Maps</Link>
+        </Button>
       </>
     ),
     [pathname]
@@ -60,7 +67,7 @@ export function Navbar() {
   const { setTheme } = useTheme();
 
   return (
-    <nav className="border-b">
+    <nav className="border-b bg-white dark:bg-black ">
       <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
         <div className="flex items-center">
           <Link href="/dashboard" className="text-xl font-bold">

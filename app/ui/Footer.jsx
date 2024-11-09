@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className=" bg-background py-10">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-6 lg:px-4">
         {/* Top Section: Contact Information and Social Links */}
         <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-8 lg:gap-12 px-20 ">
           {/* Contact Information */}
