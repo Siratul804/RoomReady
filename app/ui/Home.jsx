@@ -43,7 +43,7 @@ export default function HomePage({ Routine, userData }) {
 
   useEffect(() => {
     if (updatePostState.success) {
-      toast.success("Marked as Busy", {
+      toast.success("Marked as occupied", {
         style: {
           background: "#008000",
           color: "#fff",
@@ -52,7 +52,7 @@ export default function HomePage({ Routine, userData }) {
     }
 
     if (updatePostState.error) {
-      toast.error("Failed Mark", {
+      toast.error("Failed to occupied", {
         style: {
           background: "#FF0000",
           color: "#fff",

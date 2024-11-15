@@ -141,7 +141,7 @@ function StatusModal({ routineData }) {
                 />
               </div>
               <div className="grid grid-cols-2 items-center gap-2">
-                <Label htmlFor="room_num">Select Day </Label>
+                <Label htmlFor="room_num">Select Status </Label>
                 <Select
                   name="Status"
                   id="Status"
